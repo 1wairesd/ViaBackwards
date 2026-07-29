@@ -34,4 +34,6 @@ bin/
 # Misc
 
 run/
+.claude/
+!.claude/CLAUDE.md
 AGENTS.override.md

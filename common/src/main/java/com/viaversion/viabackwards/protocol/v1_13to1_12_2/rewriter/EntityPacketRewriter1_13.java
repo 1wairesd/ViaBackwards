@@ -354,6 +354,14 @@ public class EntityPacketRewriter1_13 extends LegacyEntityRewriter<ClientboundPa
 
             event.cancel();
         });
+
+        filter().dataType(EntityDataTypes1_12.OPTIONAL_BLOCK_STATE).handler(((event, data) -> {
+            final int blockState = data.value();
+            if (blockState != 0) {
+                final int combined = Protocol1_13To1_12_2.MAPPINGS.getNewBlockStateId(blockState);
+                data.setValue(((combined >> 4) & 0xFFF) | ((combined & 0xF) << 12));
+            }
+        }));
     }
 
     @Override
